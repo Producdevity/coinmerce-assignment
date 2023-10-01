@@ -1,5 +1,3 @@
-// import '@fontsource-variable/inter/slnt.css'
-// import '@fontsource-variable/raleway/wght-italic.css'
 import { cssBundleHref } from '@remix-run/css-bundle'
 import type { LinksFunction } from '@remix-run/node'
 import {
