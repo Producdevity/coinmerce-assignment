@@ -1,0 +1,11 @@
+@import '@fontsource-variable/raleway';
+@import '@fontsource-variable/inter';
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --hx-font-inter: 'Inter Variable';
+  --hx-font-raleway: 'Raleway Variable';
+}

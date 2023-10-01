@@ -1,4 +1,7 @@
-import type { LinksFunction } from "@remix-run/node"
+// import '@fontsource-variable/inter/slnt.css'
+// import '@fontsource-variable/raleway/wght-italic.css'
+import { cssBundleHref } from '@remix-run/css-bundle'
+import type { LinksFunction } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -6,12 +9,12 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react"
-
-import stylesheet from "~/tailwind.css"
+} from '@remix-run/react'
+import styles from '~/styles/tailwind.css'
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesheet },
+  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
+  { rel: 'stylesheet', href: styles },
 ]
 
 export default function App() {
@@ -24,7 +27,7 @@ export default function App() {
         <Links />
         <title>Coinmerce - Cryptocurrency Price Tracking</title>
       </head>
-      <body>
+      <body className="bg-base-200 relative h-auto min-h-screen w-full overflow-y-auto">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
