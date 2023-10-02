@@ -1,7 +1,7 @@
 import { Link, NavLink } from '@remix-run/react'
 import { useState } from 'react'
 import CoinmerceLogo from '~/assets/images/coinmerce-logo.svg'
-import MenuIcon from '~/components/icons/menu-icon'
+import MenuIcon from '~/components/Icons/MenuIcon'
 import navLinks from '~/data/navLinks'
 import routes from '~/data/routes'
 

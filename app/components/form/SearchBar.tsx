@@ -1,6 +1,6 @@
 import type { ChangeEventHandler } from 'react'
 import { useState } from 'react'
-import SearchIcon from '~/components/icons/search-icon'
+import SearchIcon from '~/components/Icons/SearchIcon'
 
 function SearchBar() {
   const [searchText, setSearchText] = useState('')
