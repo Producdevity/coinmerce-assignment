@@ -1,6 +1,6 @@
 import { json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import SearchBar from '~/components/form/search-bar'
+import SearchBar from '~/components/form/SearchBar'
 import Loading from '~/components/ui/loading'
 import coinsMock from '~/data/mocks/coins.mock'
 import routes from '~/data/routes'
