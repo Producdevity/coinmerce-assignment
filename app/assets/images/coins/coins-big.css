@@ -185,7 +185,8 @@
 .sprite-coins-big-ADA,
 .sprite-coins-big-AAVE,
 .sprite-coins-big-1INCH {
-  background-image: url(coins-big.png?v=19012022);
+  /* TODO: figure out how to reference a local image in Remix*/
+  background-image: url(coins-big.png);
   background-repeat: no-repeat;
 }
 
@@ -1702,6 +1703,7 @@
   .sprite-coins-big-ADA,
   .sprite-coins-big-AAVE,
   .sprite-coins-big-1INCH {
+    /* TODO: figure out how to reference a local image in Remix*/
     background-image: url(coins-big@2x.png?v=19012022);
     -webkit-background-size: 616px 616px;
     -moz-background-size: 616px 616px;
