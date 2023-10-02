@@ -20,6 +20,7 @@ type Symbol =
   | 'XLMEUR'
   | 'XRPEUR'
   | 'YFIEUR'
+  | string // TODO: Lets see what we can do here, this is not ideal
 
 export interface SymbolTicker {
   symbol: Symbol
