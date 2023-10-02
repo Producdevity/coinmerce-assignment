@@ -34,7 +34,7 @@ export const links: LinksFunction = () => [
   { rel: 'manifest', href: '/site.webmanifest' },
 ]
 
-export default function App() {
+function App() {
   return (
     <html lang="en">
       <head>
@@ -53,3 +53,5 @@ export default function App() {
     </html>
   )
 }
+
+export default App
