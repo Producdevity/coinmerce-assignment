@@ -1,8 +1,8 @@
 import type { MetaFunction } from '@remix-run/node'
 import { Link, Outlet } from '@remix-run/react'
-import Container from '~/components/layout/container'
-import Header from '~/components/layout/header'
-import Page from '~/components/layout/page'
+import Container from '~/components/layout/Container'
+import Header from '~/components/layout/Header'
+import Page from '~/components/layout/Page'
 
 export const meta: MetaFunction = () => {
   return [
