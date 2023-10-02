@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
 } from '@remix-run/react'
 import styles from '~/styles/tailwind.css'
+import t from '~/utils/t'
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
@@ -30,7 +31,6 @@ export const links: LinksFunction = () => [
     sizes: '16x16',
     href: '/favicons/favicon-16x16.png',
   },
-
   { rel: 'manifest', href: '/site.webmanifest' },
 ]
 
@@ -42,7 +42,7 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <title>Coinmerce - Cryptocurrency Price Tracking</title>
+        <title>{t('appTitle')}</title>
       </head>
       <body className="bg-base-200 relative h-auto min-h-screen w-full overflow-y-auto">
         <Outlet />
