@@ -1,15 +1,18 @@
 const text = {
   appTitle: 'Coinmerce - Cryptocurrency Price Tracking',
+  home: {
+    title: 'Home',
+  },
   coins: {
     title: 'Coins',
   },
   wallets: {
     title: 'Wallets',
   },
-  Orders: {
+  orders: {
     title: 'Orders',
   },
-  Exchange: {
+  exchange: {
     title: 'Exchange',
   },
   form: {
