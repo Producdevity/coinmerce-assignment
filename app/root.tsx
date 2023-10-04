@@ -1,12 +1,14 @@
 import { cssBundleHref } from '@remix-run/css-bundle'
 import type { LinksFunction } from '@remix-run/node'
 import {
+  isRouteErrorResponse,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteError,
 } from '@remix-run/react'
 import styles from '~/styles/tailwind.css'
 import t from '~/utils/t'
@@ -49,6 +51,29 @@ function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+      </body>
+    </html>
+  )
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError()
+  return (
+    <html>
+      <head>
+        <title>Oops!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <h1>
+          {isRouteErrorResponse(error)
+            ? `${error.status} ${error.statusText}`
+            : error instanceof Error
+            ? error.message
+            : 'Unknown Error'}
+        </h1>
+        <Scripts />
       </body>
     </html>
   )
