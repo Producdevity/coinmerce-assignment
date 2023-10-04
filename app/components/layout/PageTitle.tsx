@@ -1,11 +1,17 @@
 import type { PropsWithChildren } from 'react'
 
-function Page(props: PropsWithChildren) {
+interface Props {
+  title?: string
+}
+
+function PageTitle(props: PropsWithChildren<Props>) {
   return (
-    <div className="space-between flex min-h-screen w-full flex-col bg-slate-50">
-      {props.children}
+    <div className="w-full py-6">
+      <h1 className="text-5xl font-semibold slashed-zero text-gray-800">
+        {props.title || props.children}
+      </h1>
     </div>
   )
 }
 
-export default Page
+export default PageTitle
