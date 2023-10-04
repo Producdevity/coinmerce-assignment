@@ -8,4 +8,8 @@
 :root {
   --hx-font-inter: 'Inter Variable';
   --hx-font-raleway: 'Raleway Variable';
+
+  --hx-color-primary: #0082ff;
+  --hx-color-primary-light: #009be2;
+  --hx-color-purple: #009be2;
 }
