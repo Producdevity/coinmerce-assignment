@@ -10,6 +10,12 @@ const ignorePatterns = [
   '\\/\\.cache\\/',
 ]
 
+/**
+ * Don't bother get this working for now.
+ * It's not worth the effort. The Remix teams is working on it.
+ * @see https://github.com/remix-run/remix/pull/1939
+ */
+
 const config: Config = {
   modulePathIgnorePatterns: ignorePatterns,
   testMatch: ['<rootDir>/**/*.test.[jt]s?(x)'],
@@ -20,7 +26,6 @@ const config: Config = {
   watchPathIgnorePatterns: [...ignorePatterns, '\\/node_modules\\/'],
   moduleNameMapper: hq.get('jest'),
 
-  // setupFiles: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 }
