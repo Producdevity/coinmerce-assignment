@@ -8,5 +8,7 @@ module.exports = {
   ],
   rules: {
     'react/jsx-key': 'error',
+    'prefer-template': 'error',
+    'prefer-const': 'error',
   },
 }
