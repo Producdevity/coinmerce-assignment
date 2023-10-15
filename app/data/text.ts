@@ -15,6 +15,9 @@ const text = {
   exchange: {
     title: 'Exchange',
   },
+  common: {
+    openMainMenu: 'Open main menu',
+  },
   form: {
     search: {
       placeholder: 'Search here...',

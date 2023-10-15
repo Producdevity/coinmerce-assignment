@@ -5,11 +5,25 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-:root {
-  --hx-font-inter: 'Inter Variable';
-  --hx-font-raleway: 'Raleway Variable';
+@layer base {
+  :root {
+    --hx-font-inter: 'Inter Variable';
+    --hx-font-raleway: 'Raleway Variable';
 
-  --hx-color-primary: #0082ff;
-  --hx-color-primary-light: #009be2;
-  --hx-color-purple: #009be2;
+    --color-primary: #0082ff;
+    --color-primary-light: #009be2;
+    --color-dark-purple: #009be2;
+    --color-purple: #009be2;
+    --color-white: #ffffff;
+    --color-white-50: #ffffff80;
+    --color-footer-blue: #010e21;
+    --color-gray-1: #f8f9fd;
+    --color-gray-2: #eff1f8;
+    --color-gray-3: #e3e5ed;
+    --color-gray-4: #d9d9d9;
+    --color-gray-6: #9da0ac;
+    --color-green: #0daa49;
+    --color-red: #e93230;
+    --color-yellow: #fecc4c;
+  }
 }
