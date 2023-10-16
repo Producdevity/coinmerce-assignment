@@ -1,6 +1,8 @@
 import type { AxiosPromise } from 'axios'
 import axios from 'axios'
+import { SupportedCoin } from '~/data/supportedCoins'
 import type { SymbolPrice } from '~/types/api.types'
+import encodeSymbols from '~/utils/encodeSymbols'
 
 class Api {
   private http = axios.create({
@@ -47,12 +49,10 @@ class Api {
 
   public get = (url: string, params?: any) => this.http.get(url, { params })
 
-  public getCoins(): GetCoinsPromise {
-    console.log(
-      'process.env.BINANCE_API_BASE_URL,',
-      process.env.BINANCE_API_BASE_URL,
+  public getCoins(symbolsList: SupportedCoin[]): GetCoinsPromise {
+    return this.http.get(
+      `api/v3/ticker/price?symbols=${encodeSymbols(symbolsList, 'EUR')}`,
     )
-    return this.http.get('api/v3/ticker/price') // TODO: add symbols
   }
 }
 
