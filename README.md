@@ -8,7 +8,7 @@ I chose [Remix](https://remix.run) over [NextJS](https://nextjs.org) because it 
 
 ## Check it out
 
-You can check out the live version of the app [here](https://coinmerce-assignment-ox7u50xd4-yassinegherbis-projects.vercel.app).
+You can check out the live version of the app [here](https://coinmerce-assignment.vercel.app).
 
 ## Getting Started
 
