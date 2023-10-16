@@ -6,9 +6,9 @@ This is a project I made for a job application. It's a simple cryptocurrency tra
 
 I chose [Remix](https://remix.run) over [NextJS](https://nextjs.org) because it was the one area I hadn't explored yet, and I wanted to take this chance to broaden my skill set.
 
-- [Remix Docs](https://remix.run/docs)
+## Check it out
 
-## Development
+You can check out the live version of the app [here](https://crypto-tracker-ten.vercel.app).
 
 ## Getting Started
 
