@@ -45,8 +45,14 @@ class Api {
     console.warn(`error status: ${error.response.status}`, error.response.data)
   }
 
+  public get = (url: string, params?: any) => this.http.get(url, { params })
+
   public getCoins(): GetCoinsPromise {
-    return this.http.get('api/v3/ticker/price?symbols=') // TODO: add symbols
+    console.log(
+      'process.env.BINANCE_API_BASE_URL,',
+      process.env.BINANCE_API_BASE_URL,
+    )
+    return this.http.get('api/v3/ticker/price') // TODO: add symbols
   }
 }
 
