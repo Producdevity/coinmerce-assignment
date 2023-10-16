@@ -1,13 +1,13 @@
-import text from '../data/text'
 import t from './t'
 import '@testing-library/jest-dom/extend-expect'
+import text from '~/data/text'
 
 // Mock lodash.get and lodash.forEach since they are external dependencies
 jest.mock('lodash.get', () => jest.fn())
 jest.mock('lodash.foreach', () => jest.fn())
 
-// Mock text object from '../data/text'
-jest.mock('../data/text', () => ({
+// Mock text object from '~/data/text'
+jest.mock('~/data/text', () => ({
   greeting: 'Hello, :0!',
 }))
 

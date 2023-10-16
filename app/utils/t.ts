@@ -1,6 +1,6 @@
-import text from '../data/text'
 import forEach from 'lodash.foreach'
 import get from 'lodash.get'
+import text from '~/data/text'
 
 /**
  * Provides internationalization (i18n) support (not really tbh) for the application by fetching localized text based on a given key.
