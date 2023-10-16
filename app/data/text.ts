@@ -5,6 +5,9 @@ const text = {
   },
   coins: {
     title: 'Coins',
+    price: 'Price (€)',
+    coin: 'Coin',
+    favorite: 'Favorite',
   },
   wallets: {
     title: 'Wallets',

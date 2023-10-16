@@ -13,18 +13,7 @@ function encodeSymbols(symbols: string[], baseSymbol: string) {
 }
 
 export const loader = async () => {
-  const symbolsList = [
-    'BTC',
-    'ETH',
-    'BCH',
-    'XRP',
-    'EOS',
-    'LTC',
-    'TRX',
-    'ADA',
-    'XLM',
-    'LINK',
-  ]
+  const symbolsList: SupportedCoin[] = take(supportedCoins, 10)
 
   // make an api request
   function getCoins() {
@@ -45,17 +34,13 @@ export const loader = async () => {
 
 function Coins() {
   const { coins } = useLoaderData<typeof loader>()
-
-  console.log('coins', coins)
-  const onChangeTab = (tab: Tab) => {
-    console.log(`TODO: Tab Changed to ${tab.label}`)
-  }
+  const [currentTabId, setCurrentTabId] = useState<Tab['id']>(tabs[0].id)
 
   return (
     <FavoriteProvider>
       <SearchBar />
-      <TabBar onChangeTab={onChangeTab} />
-      {coins ? <CoinList coins={coins} /> : <Loading />}
+      <TabBar onChangeTab={(tab) => setCurrentTabId(tab.id)} />
+      {coins ? <CoinList tabId={currentTabId} coins={coins} /> : <Loading />}
     </FavoriteProvider>
   )
 }
