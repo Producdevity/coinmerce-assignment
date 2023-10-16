@@ -1,6 +1,5 @@
 import { cssBundleHref } from '@remix-run/css-bundle'
 import { json } from '@remix-run/node'
-import type { LinksFunction } from '@remix-run/node'
 import {
   isRouteErrorResponse,
   Links,
@@ -12,6 +11,8 @@ import {
   useLoaderData,
   useRouteError,
 } from '@remix-run/react'
+import { Analytics } from '@vercel/analytics/react'
+import type { LinksFunction } from '@vercel/remix'
 import styles from '~/styles/tailwind.css'
 import t from '~/utils/t'
 
@@ -68,6 +69,7 @@ function App() {
         />
         <Scripts />
         <LiveReload />
+        <Analytics />
       </body>
     </html>
   )
