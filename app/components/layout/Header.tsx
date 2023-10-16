@@ -4,6 +4,7 @@ import CoinmerceLogo from '~/assets/images/coinmerce-logo.svg'
 import MenuIcon from '~/components/Icons/MenuIcon'
 import navLinks from '~/data/navLinks'
 import routes from '~/data/routes'
+import t from '~/utils/t'
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false)
@@ -27,7 +28,7 @@ function Header() {
           aria-expanded={isNavOpen}
           onClick={() => setIsNavOpen((prevState) => !prevState)}
         >
-          <span className="sr-only">Open main menu</span>
+          <span className="sr-only">{t('common.openMainMenu')}</span>
           <MenuIcon />
         </button>
 
