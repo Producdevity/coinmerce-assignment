@@ -1,4 +1,5 @@
 import { cssBundleHref } from '@remix-run/css-bundle'
+import { json } from '@remix-run/node'
 import type { LinksFunction } from '@remix-run/node'
 import {
   isRouteErrorResponse,
@@ -8,6 +9,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   useRouteError,
 } from '@remix-run/react'
 import styles from '~/styles/tailwind.css'
@@ -36,7 +38,17 @@ export const links: LinksFunction = () => [
   { rel: 'manifest', href: '/site.webmanifest' },
 ]
 
+export async function loader() {
+  return json({
+    ENV: {
+      BINANCE_WEBSOCKET_URL: process.env.BINANCE_WEBSOCKET_URL,
+    },
+  })
+}
+
 function App() {
+  const data = useLoaderData<typeof loader>()
+
   return (
     <html lang="en">
       <head>
@@ -49,6 +61,11 @@ function App() {
       <body className="bg-base-200 relative h-auto min-h-screen w-full overflow-y-auto">
         <Outlet />
         <ScrollRestoration />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+          }}
+        />
         <Scripts />
         <LiveReload />
       </body>
