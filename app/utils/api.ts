@@ -1,6 +1,5 @@
-import type { AxiosPromise } from 'axios'
-import axios from 'axios'
-import { SupportedCoin } from '~/data/supportedCoins'
+import axios, { type AxiosPromise } from 'axios'
+import type { SupportedCoin } from '~/data/supportedCoins'
 import type { SymbolPrice } from '~/types/api.types'
 import encodeSymbols from '~/utils/encodeSymbols'
 

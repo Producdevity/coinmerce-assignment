@@ -1,4 +1,5 @@
 import { useTransition, animated, config } from '@react-spring/web'
+import { useEffect } from 'react'
 import CoinListHeader from '~/components/CoinList/components/CoinListHeader'
 import CoinListItem from '~/components/CoinList/components/CoinListItem'
 import CoinListItemDivider from '~/components/CoinList/components/CoinListItemDivider'
@@ -22,7 +23,7 @@ function CoinList(props: Props) {
   const transitions = useTransition(filteredCoins, {
     keys: (coin: SymbolPrice) => coin.symbol,
     from: { opacity: 0, transform: 'translateX(-100%)' },
-    enter: { opacity: 1, transform: 'translateX(0)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
     leave: { opacity: 0, transform: 'translateX(-50%)' },
     config: config.stiff,
     trail: 25,
