@@ -1,9 +1,9 @@
 import { Outlet } from '@remix-run/react'
-import Container from '~/components/layout/Container'
-import Footer from '~/components/layout/Footer'
-import Header from '~/components/layout/Header'
-import Page from '~/components/layout/Page'
-import PageTitle from '~/components/layout/PageTitle'
+import Container from '~/components/Layout/Container'
+import Footer from '~/components/Layout/Footer'
+import Header from '~/components/Layout/Header'
+import Page from '~/components/Layout/Page'
+import PageTitle from '~/components/Layout/PageTitle'
 import t from '~/utils/t'
 
 function Coins() {
