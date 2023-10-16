@@ -16,7 +16,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "download-images": "node ./scripts/download_coin_images.cjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.0.13",

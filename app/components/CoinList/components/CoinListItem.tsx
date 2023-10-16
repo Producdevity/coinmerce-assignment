@@ -14,17 +14,14 @@ function CoinListItem(props: Props) {
     <div className="flex max-w-full flex-row items-start justify-between gap-5 px-5 py-3.5 hover:backdrop-saturate-150 max-md:flex-wrap">
       <div className="flex flex-row items-start gap-2.5 self-center">
         <CoinIcon symbol={props.symbol} />
-        <a href="#" className="self-center text-xs font-bold text-neutral-600">
+        <span className="self-center text-xs font-bold text-neutral-600">
           {props.symbol}
-        </a>
+        </span>
       </div>
       <div className="flex max-w-full flex-row items-start justify-between gap-5 self-center">
-        <a
-          href="#"
-          className="mr-12 self-center text-right text-xs font-semibold text-neutral-600"
-        >
+        <span className="mr-12 self-center text-right text-xs font-semibold text-neutral-600">
           € {parseFloat(props.price)}
-        </a>
+        </span>
         <FavoriteToggle
           onToggle={() => toggleFavorite(props.symbol)}
           isFavorite={isFavorite(props.symbol)}

@@ -31,7 +31,6 @@ export function FavoriteProvider(props: PropsWithChildren<{}>) {
 
   useEffect(() => {
     const storedFavorites = localStorage.getItem(LOCAL_STORAGE_KEY)
-    console.log('storedFavorites', storedFavorites)
     if (storedFavorites) {
       setFavorites(JSON.parse(storedFavorites))
     }
@@ -46,7 +45,6 @@ export function FavoriteProvider(props: PropsWithChildren<{}>) {
   const isFavorite = (coin: SupportedCoin) => favorites.includes(coin)
 
   const toggleFavorite = (coin: SupportedCoin) => {
-    console.log('toggleFavorite is called', coin)
     setFavorites((prevState) =>
       isFavorite(coin)
         ? prevState.filter((fav) => fav !== coin)

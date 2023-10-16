@@ -5,12 +5,11 @@ import StarSelected from '~/components/Icons/Star/StarSelected'
 
 interface Props {
   isFavorite: boolean
-  onToggle?: () => void
+  onToggle: () => void
 }
 
 function FavoriteToggle(props: Props) {
   const [isFavorite, setIsFavorite] = useState(props.isFavorite)
-  const [initialized, setInitialized] = useState(false)
   const [style, setStyle] = useSpring(() => ({
     transform: 'scale(1) rotate(0deg)',
     config: {
@@ -19,35 +18,14 @@ function FavoriteToggle(props: Props) {
     },
   }))
 
-  // Initialization
-  useEffect(() => {
-    setIsFavorite(props.isFavorite)
-    setInitialized(true)
-  }, [])
-
-  // Handle prop changes
   useEffect(() => {
     setIsFavorite(props.isFavorite)
   }, [props.isFavorite])
 
-  // Main effect
-  useEffect(() => {
-    console.log(
-      `Initialized: ${initialized}, isFavorite: ${isFavorite}, props.isFavorite: ${props.isFavorite}`,
-    )
-
-    if (!initialized) return
-
-    if (isFavorite === props.isFavorite) return
-
-    if (props.onToggle) {
-      console.log(`Calling onToggle for ${isFavorite}`)
-      props.onToggle()
-    }
-  }, [isFavorite, props.isFavorite, props.onToggle, initialized])
-
   const handleToggle = () => {
     setIsFavorite((prev) => !prev)
+
+    props.onToggle()
 
     setStyle({
       transform: 'scale(1.4) rotate(15deg)',
