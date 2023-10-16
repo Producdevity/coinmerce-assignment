@@ -18,3 +18,9 @@ declare global {
     }
   }
 }
+
+declare module '*.css' {
+  export let asset: string
+  // extend the existing *.css definition to include a named export
+  export const styles: Record<string, string>
+}
