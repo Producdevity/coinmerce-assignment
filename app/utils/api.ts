@@ -46,8 +46,6 @@ class Api {
     console.warn(`error status: ${error.response.status}`, error.response.data)
   }
 
-  public get = (url: string, params?: any) => this.http.get(url, { params })
-
   public getCoins(symbolsList: SupportedCoin[]): GetCoinsPromise {
     return this.http.get(
       `api/v3/ticker/price?symbols=${encodeSymbols(symbolsList, 'EUR')}`,
