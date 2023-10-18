@@ -4,7 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "cross-env NODE_ENV=production remix build",
+    "build": "remix build",
     "dev": "cross-env NODE_ENV=development remix dev --manual",
     "dev:auto": "remix dev",
     "start": "remix-serve ./build/index.js",
