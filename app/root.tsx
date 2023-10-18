@@ -80,7 +80,7 @@ export function ErrorBoundary() {
   return (
     <html>
       <head>
-        <title>Oops!</title>
+        <title>Oops! Something went wrong</title>
         <Meta />
         <Links />
       </head>
