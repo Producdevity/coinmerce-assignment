@@ -29,7 +29,11 @@ function Coins() {
     <FavoriteProvider>
       <SearchBar />
       <TabBar onChangeTab={(tab) => setCurrentTabId(tab.id)} />
-      {coins ? <CoinList tabId={currentTabId} coins={coins} /> : <Loading />}
+      {coins ? (
+        <CoinList tabId={currentTabId} coins={coins || []} />
+      ) : (
+        <Loading />
+      )}
     </FavoriteProvider>
   )
 }
