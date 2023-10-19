@@ -1,11 +1,15 @@
-import { useTransition, animated, config } from '@react-spring/web'
-import { useEffect, useState } from 'react'
+import { animated, config, useTransition } from '@react-spring/web'
+import { useEffect, useMemo, useState } from 'react'
 import CoinListHeader from '~/components/CoinList/components/CoinListHeader'
 import CoinListItem from '~/components/CoinList/components/CoinListItem'
 import CoinListItemDivider from '~/components/CoinList/components/CoinListItemDivider'
 import type { Tab } from '~/components/TabBar/data'
 import { useFavoriteContext } from '~/context/FavoriteContext'
-import type { SymbolPrice, WebSocketResponse } from '~/types/api.types'
+import type {
+  ParsedSymbolPrice,
+  SymbolPrice,
+  WebSocketResponse,
+} from '~/types/api.types'
 import useEffectOnce from '~/utils/hooks/useEffectOnce'
 
 interface Props {
@@ -15,19 +19,26 @@ interface Props {
 
 function CoinList(props: Props) {
   const { isFavorite } = useFavoriteContext()
-  const [updatedCoins, setUpdatedCoins] = useState<SymbolPrice[]>([])
+  const [coins, setCoins] = useState<SymbolPrice[]>([])
 
   useEffect(() => {
+    setCoins(props.coins)
+  }, [props.coins])
+
+  const parsedFilteredCoins = useMemo<ParsedSymbolPrice[]>(() => {
     const filteredCoins =
       props.tabId === 'favorites'
-        ? props.coins.filter((coin) => isFavorite(coin.symbol))
-        : props.coins
+        ? coins.filter((coin) => isFavorite(coin.symbol))
+        : coins
 
-    setUpdatedCoins(filteredCoins)
-  }, [isFavorite, props.coins, props.tabId])
+    return filteredCoins.map((coin) => ({
+      ...coin,
+      price: parseFloat(coin.price),
+    }))
+  }, [isFavorite, coins, props.tabId])
 
-  const transitions = useTransition(updatedCoins, {
-    keys: (coin: SymbolPrice) => coin.symbol,
+  const transitions = useTransition(parsedFilteredCoins, {
+    keys: (coin: ParsedSymbolPrice) => coin.symbol,
     from: { opacity: 0, transform: 'translateX(-100%)' },
     enter: { opacity: 1, transform: 'translateX(0px)' },
     leave: { opacity: 0, transform: 'translateX(-50%)' },
@@ -36,14 +47,13 @@ function CoinList(props: Props) {
   })
 
   useEffectOnce(() => {
-    const coinsSubscription = props.coins.map(
-      (coin) => `${coin.symbol.toLowerCase()}@ticker`,
-    )
-
-    // Initialize WebSocket connection
     const ws = new WebSocket(window.ENV.BINANCE_WEBSOCKET_URL)
 
     ws.addEventListener('open', () => {
+      const coinsSubscription = coins.map(
+        (coin) => `${coin.symbol.toLowerCase()}@ticker`,
+      )
+
       const msg = {
         method: 'SUBSCRIBE',
         params: coinsSubscription,
@@ -53,27 +63,34 @@ function CoinList(props: Props) {
     })
 
     ws.addEventListener('message', (event: MessageEvent) => {
-      const response = JSON.parse(event.data) as WebSocketResponse // Replace 'unknown' with your actual response type
+      const res = JSON.parse(event.data) as WebSocketResponse // Replace 'unknown' with your actual response type
 
-      // Update your coins state here
-      console.log('WebSocket response:', response)
+      const currentCoin = parsedFilteredCoins.find(
+        (coin) => coin.symbol === res.s,
+      )
+      console.log('currentCoin', currentCoin)
 
-      // Assume you have a function like `updateCoinPrice` to update the coin's price
-      // updateCoinPrice(response as SymbolPrice); // Again, replace 'SymbolPrice' with your actual type if different
+      const newParsedPrice = parseFloat(res.c)
+
+      if (currentCoin?.price === newParsedPrice) return
+
+      console.log('currentCoin', currentCoin)
+      console.log(`symbol: ${res.s}, price: ${parseFloat(res.c)}`)
+
+      setCoins((prevCoins) =>
+        prevCoins.map((coin) =>
+          coin.symbol === res.s ? { ...coin, price: res.c } : coin,
+        ),
+      )
     })
 
     ws.addEventListener('error', (event: Event) => {
-      console.log(`WebSocket Error: ${event}`)
+      console.log(`WebSocket Error: ${JSON.stringify(event)}`)
     })
 
     ws.addEventListener('close', () => {
       console.log('WebSocket connection closed')
     })
-
-    // TODO: remove, temp
-    setTimeout(() => {
-      ws.close()
-    }, 2000)
 
     return () => ws.close()
   })

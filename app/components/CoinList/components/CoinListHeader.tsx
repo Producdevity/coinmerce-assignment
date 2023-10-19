@@ -2,7 +2,7 @@ import t from '~/utils/t'
 
 function CoinListHeader() {
   return (
-    <div className="mb-4 ml-2 flex w-[644px] max-w-full flex-row items-start justify-between gap-5 px-5 max-md:flex-wrap">
+    <div className="mb-4 ml-2 flex max-w-full flex-row items-start justify-between gap-5 px-5 max-md:flex-wrap">
       <span className="text-xs font-semibold text-gray-400">
         {t('coins.coin')}
       </span>

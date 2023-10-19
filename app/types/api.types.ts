@@ -31,6 +31,10 @@ export interface SymbolPrice extends SymbolTicker {
   price: string
 }
 
+export interface ParsedSymbolPrice extends SymbolTicker {
+  price: number
+}
+
 export interface WebSocketResponse {
   A: string // Best ask quantity
   B: string // Best bid quantity
