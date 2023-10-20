@@ -20,11 +20,6 @@ function CoinListItem(props: Props) {
     trail: 25,
   }))
 
-  const [numbers, setNumbers] = useSpring(() => ({
-    val: 100000,
-    from: { val: 0 },
-  }))
-
   useEffect(() => {
     // TODO: try do the parsing here to smooth out the animation
     setSpringProps.start({ number: parseFloat(props.price) })
@@ -40,11 +35,9 @@ function CoinListItem(props: Props) {
       </div>
       <div className="flex max-w-full flex-row items-start justify-between gap-5 self-center">
         <animated.span className="mr-12 self-center text-right text-xs font-semibold text-neutral-600">
+          {/*TODO: add pulse on update*/}
           {springProps.number.to((n) => `€ ${n}`)}
         </animated.span>
-        <animated.div className="number">
-          {numbers.val.to((val) => Math.floor(val))}
-        </animated.div>
         <FavoriteToggle
           onToggle={() => toggleFavorite(props.symbol)}
           isFavorite={isFavorite(props.symbol)}

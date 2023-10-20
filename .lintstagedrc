@@ -1,3 +1,4 @@
 {
-  "**/*": ["prettier --write --ignore-unknown"]
+  "app/**/*.{js,jsx,ts,tsx,json}": ["prettier --write"],
+  "app/**/*.{js,jsx,ts,tsx}": ["eslint --config .eslintrc.cjs --fix"]
 }
