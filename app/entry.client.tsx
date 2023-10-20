@@ -60,7 +60,7 @@ function hydrate() {
 if (window.requestIdleCallback) {
   window.requestIdleCallback(hydrate)
 } else {
-  // Sa5374 6506 0085 8616fari doesn't support requestIdleCallback
+  // Safari doesn't support requestIdleCallback
   // https://caniuse.com/requestidlecallback
   window.setTimeout(hydrate, 1)
 }
