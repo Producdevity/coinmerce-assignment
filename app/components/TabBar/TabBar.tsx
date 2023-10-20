@@ -1,19 +1,20 @@
-import { useState, useRef, type MouseEvent } from 'react'
+import { useRef, type MouseEvent } from 'react'
 import tabs, { type Tab } from '~/components/TabBar/data'
+import { useTabContext } from '~/context/TabContext'
 
 interface Props {
   onChangeTab?: (tab: Tab) => void
 }
 
 function TabBar(props: Props) {
-  const [activeTabId, setActiveTabId] = useState(tabs[0].id)
+  const { setTabId, currentTab } = useTabContext()
   const indicatorRef = useRef<HTMLDivElement | null>(null)
 
   const handleTabClick = (tab: Tab, ev: MouseEvent) => {
     const tabElement = ev.currentTarget as HTMLElement
     const { offsetLeft, offsetWidth } = tabElement
 
-    setActiveTabId(tab.id)
+    setTabId(tab.id)
     props.onChangeTab?.(tab)
 
     if (indicatorRef.current) {
@@ -31,11 +32,11 @@ function TabBar(props: Props) {
               href="#"
               onClick={(ev) => handleTabClick(tab, ev)}
               className={`inline-block rounded-t-lg p-4 text-gray-400 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300 ${
-                activeTabId === tab.id
+                currentTab.id === tab.id
                   ? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500'
                   : 'border-transparent'
               }`}
-              aria-current={activeTabId === tab.id ? 'page' : 'false'}
+              aria-current={currentTab.id === tab.id ? 'page' : 'false'}
             >
               {tab.label}
             </a>

@@ -1,6 +1,6 @@
-import type { WebSocketResponse } from '~/types/api.types'
+import type { WebSocketTickerResponse } from '~/types/api.types'
 
-const websocketResponseMock: WebSocketResponse = {
+const websocketResponseMock: WebSocketTickerResponse = {
   A: '100', // Best ask quantity
   B: '10', // Best bid quantity
   C: 86400000, // Statistics close time

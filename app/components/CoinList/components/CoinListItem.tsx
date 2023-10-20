@@ -3,24 +3,31 @@ import { useEffect } from 'react'
 import FavoriteToggle from '~/components/Form/FavoriteToggle'
 import CoinIcon from '~/components/Icons/CoinIcon'
 import { useFavoriteContext } from '~/context/FavoriteContext'
+import type { SymbolPrice } from '~/types/api.types'
 
 interface Props {
-  symbol: string
-  price: number
+  symbol: SymbolPrice['symbol']
+  price: SymbolPrice['price']
 }
 
 function CoinListItem(props: Props) {
   const { isFavorite, toggleFavorite } = useFavoriteContext()
 
   const [springProps, setSpringProps] = useSpring(() => ({
-    number: props.price,
+    number: parseFloat(props.price),
+    from: { number: 0 },
     config: config.stiff,
     trail: 25,
   }))
 
+  const [numbers, setNumbers] = useSpring(() => ({
+    val: 100000,
+    from: { val: 0 },
+  }))
+
   useEffect(() => {
     // TODO: try do the parsing here to smooth out the animation
-    setSpringProps({ number: props.price })
+    setSpringProps.start({ number: parseFloat(props.price) })
   }, [props.price, setSpringProps])
 
   return (
@@ -35,6 +42,9 @@ function CoinListItem(props: Props) {
         <animated.span className="mr-12 self-center text-right text-xs font-semibold text-neutral-600">
           {springProps.number.to((n) => `€ ${n}`)}
         </animated.span>
+        <animated.div className="number">
+          {numbers.val.to((val) => Math.floor(val))}
+        </animated.div>
         <FavoriteToggle
           onToggle={() => toggleFavorite(props.symbol)}
           isFavorite={isFavorite(props.symbol)}

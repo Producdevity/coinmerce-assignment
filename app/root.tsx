@@ -13,6 +13,7 @@ import {
 } from '@remix-run/react'
 import { Analytics } from '@vercel/analytics/react'
 import type { LinksFunction } from '@vercel/remix'
+import { EnvContext } from '~/context/EnvContext'
 import styles from '~/styles/tailwind.css'
 import t from '~/utils/t'
 
@@ -42,7 +43,7 @@ export const links: LinksFunction = () => [
 export async function loader() {
   return json({
     ENV: {
-      BINANCE_WEBSOCKET_URL: process.env.BINANCE_WEBSOCKET_URL,
+      BINANCE_WEBSOCKET_URL: process.env.BINANCE_WEBSOCKET_URL || '',
     },
   })
 }
@@ -60,16 +61,18 @@ function App() {
         <title>{t('appTitle')}</title>
       </head>
       <body className="bg-base-200 relative h-auto min-h-screen w-full overflow-y-auto">
-        <Outlet />
-        <ScrollRestoration />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
-          }}
-        />
-        <Scripts />
-        <LiveReload />
-        <Analytics />
+        <EnvContext.Provider value={data.ENV}>
+          <Outlet />
+          <ScrollRestoration />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+            }}
+          />
+          <Scripts />
+          <LiveReload />
+          <Analytics />
+        </EnvContext.Provider>
       </body>
     </html>
   )
@@ -80,18 +83,27 @@ export function ErrorBoundary() {
   return (
     <html>
       <head>
-        <title>Oops! Something went wrong</title>
+        <title>{t('errors.title')}</title>
         <Meta />
         <Links />
       </head>
       <body>
-        <h1>
-          {isRouteErrorResponse(error)
-            ? `${error.status} ${error.statusText}`
-            : error instanceof Error
-            ? error.message
-            : 'Unknown Error'}
-        </h1>
+        <div
+          className="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+          role="alert"
+        >
+          <strong className="font-bold">{t('errors.oops')}</strong>
+          <span className="block lg:inline">
+            {t('errors.somethingWentWrong')}
+          </span>
+          <span className="block lg:inline">
+            {isRouteErrorResponse(error)
+              ? `${error.status} ${error.statusText}`
+              : error instanceof Error
+              ? error.message
+              : t('errors.unknown')}
+          </span>
+        </div>
         <Scripts />
       </body>
     </html>

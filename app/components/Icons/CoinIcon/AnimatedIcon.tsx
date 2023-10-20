@@ -1,6 +1,5 @@
 import type { LottiePlayer } from '@lottiefiles/lottie-player'
 import React, { useEffect, type CSSProperties } from 'react'
-import Loading from '~/components/ui/Loading'
 
 interface Props extends Partial<Omit<LottiePlayer, 'style'>> {
   autoplay?: LottiePlayer['autoplay']
@@ -17,9 +16,7 @@ function AnimatedIcon(props: Props) {
 
   const { style, src, ...rest } = props
 
-  return typeof document === 'undefined' ? (
-    <Loading />
-  ) : (
+  return typeof document === 'undefined' ? null : (
     <div>
       {/* @ts-ignore */}
       <lottie-player

@@ -21,11 +21,9 @@ export const FavoriteContext = createContext<FavoriteContextType>({
   toggleFavorite: () => {},
 })
 
-export function useFavoriteContext() {
-  return useContext(FavoriteContext)
-}
+export const useFavoriteContext = () => useContext(FavoriteContext)
 
-export function FavoriteProvider(props: PropsWithChildren<{}>) {
+export function FavoriteContextProvider(props: PropsWithChildren<{}>) {
   const [favorites, setFavorites] = useState<SupportedCoin[]>([])
   const [loading, setLoading] = useState(true)
 

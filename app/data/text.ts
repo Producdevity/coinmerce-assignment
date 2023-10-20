@@ -26,6 +26,12 @@ const text = {
       placeholder: 'Search here...',
     },
   },
+  errors: {
+    title: 'Oops! Something went wrong',
+    oops: 'Oops!',
+    somethingWentWrong: 'Something went wrong. Please try again later.',
+    unknownError: 'Unknown error',
+  },
 }
 
 export default text

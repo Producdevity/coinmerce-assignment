@@ -2,25 +2,58 @@
 
 type Symbol =
   | 'ADAEUR'
+  | 'ALPINEEUR'
+  | 'APEEUR'
+  | 'APTEUR'
+  | 'ARBEUR'
   | 'ATOMEUR'
   | 'AVAXEUR'
   | 'BCHEUR'
   | 'BNBEUR'
   | 'BTCEUR'
+  | 'CHZEUR'
+  | 'DAREUR'
   | 'DOGEEUR'
   | 'DOTEUR'
+  | 'EDUEUR'
   | 'EGLDEUR'
+  | 'ENJEUR'
   | 'EOSEUR'
+  | 'ETCEUR'
   | 'ETHEUR'
+  | 'FTMEUR'
+  | 'GALEUR'
+  | 'GALAEUR'
+  | 'GMTEUR'
   | 'GRTEUR'
+  | 'HOTEUR'
+  | 'ICPEUR'
+  | 'IDEUR'
+  | 'JASMYEUR'
+  | 'LAZIOEUR'
   | 'LINKEUR'
   | 'LTCEUR'
+  | 'LUNAEUR'
+  | 'MATICEUR'
+  | 'NEAREUR'
+  | 'OPEUR'
+  | 'PORTOEUR'
+  | 'RUNEEUR'
+  | 'SHIBEUR'
+  | 'SOLEUR'
+  | 'SUIEUR'
   | 'SXPEUR'
+  | 'THETAEUR'
+  | 'TRXEUR'
   | 'UNIEUR'
+  | 'VETEUR'
+  | 'WAVESEUR'
+  | 'WINEUR'
+  | 'WRXEUR'
   | 'XLMEUR'
   | 'XRPEUR'
   | 'YFIEUR'
-  | string // TODO: Lets see what we can do here, this is not ideal
+  | 'ZILEUR'
 
 export interface SymbolTicker {
   symbol: Symbol
@@ -31,11 +64,7 @@ export interface SymbolPrice extends SymbolTicker {
   price: string
 }
 
-export interface ParsedSymbolPrice extends SymbolTicker {
-  price: number
-}
-
-export interface WebSocketResponse {
+export interface WebSocketTickerResponse {
   A: string // Best ask quantity
   B: string // Best bid quantity
   C: number // Statistics close time
