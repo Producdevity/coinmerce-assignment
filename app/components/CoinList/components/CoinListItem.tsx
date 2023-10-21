@@ -14,27 +14,31 @@ interface Props {
 function CoinListItem({ symbol, price }: Props) {
   const { isFavorite, toggleFavorite } = useFavoriteContext()
   const [isUpdating, setIsUpdating] = useState(false)
-  const [isFirstUpdate, setIsFirstUpdate] = useState(true)
 
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false)
+
+  const tooltipTransition = useSpring({
+    opacity: isTooltipVisible ? 1 : 0,
+    config: { duration: 200 },
+  })
   const parsedPrice = parseFloat(price)
 
   const [springProps, springRef] = useSpring(() => ({
     number: parsedPrice,
     from: { number: 0 },
-    config: config.stiff,
-    trail: 25,
+    reset: true,
+    reverse: isUpdating,
+    onRest: () => setTimeout(() => setIsUpdating(false), 1000),
+    onStart: () => setIsUpdating(true),
+    config: {
+      ...config.stiff,
+      duration: 200,
+    },
   }))
 
   useEffect(() => {
     springRef.start({ number: parsedPrice })
-    if (isFirstUpdate) {
-      setIsFirstUpdate(false)
-      return
-    }
-    setIsUpdating(true)
-    const timeoutId = setTimeout(() => setIsUpdating(false), 1500)
-    return () => clearTimeout(timeoutId)
-  }, [parsedPrice, springRef, isFirstUpdate])
+  }, [parsedPrice, springRef])
 
   return (
     <div className="flex max-w-full flex-row items-start justify-between gap-5 px-5 py-3.5 hover:backdrop-saturate-150 max-md:flex-wrap">
@@ -45,11 +49,23 @@ function CoinListItem({ symbol, price }: Props) {
         </span>
       </div>
       <div className="flex max-w-full flex-row items-start justify-between gap-5 self-center">
-        <div className="relative">
+        <div
+          onMouseEnter={() => setIsTooltipVisible(true)}
+          onMouseLeave={() => setIsTooltipVisible(false)}
+          className="relative"
+        >
           <CoinListItemPulse isVisible={isUpdating} />
           <animated.span className="mr-12 self-center text-right text-xs font-semibold text-neutral-600">
-            {springProps.number.to((n) => `€ ${n}`)}
+            {springProps.number.to((n) => `€ ${n.toFixed(2)}`)}
           </animated.span>
+          {isTooltipVisible && (
+            <animated.div
+              style={tooltipTransition}
+              className="absolute -left-16 -top-12 rounded bg-white p-2 shadow"
+            >
+              {`€ ${price}`}
+            </animated.div>
+          )}
         </div>
         <FavoriteToggle
           onToggle={() => toggleFavorite(symbol)}
