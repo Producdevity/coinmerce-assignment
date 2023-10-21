@@ -18,14 +18,15 @@ function CoinListItem({ symbol, price }: Props) {
 
   const parsedPrice = parseFloat(price)
 
-  const [springProps, setSpringProps] = useSpring(() => ({
+  const [springProps, springRef] = useSpring(() => ({
     number: parsedPrice,
     from: { number: 0 },
     config: config.stiff,
+    trail: 25,
   }))
 
   useEffect(() => {
-    setSpringProps.start({ number: parsedPrice })
+    springRef.start({ number: parsedPrice })
     if (isFirstUpdate) {
       setIsFirstUpdate(false)
       return
@@ -33,7 +34,7 @@ function CoinListItem({ symbol, price }: Props) {
     setIsUpdating(true)
     const timeoutId = setTimeout(() => setIsUpdating(false), 1500)
     return () => clearTimeout(timeoutId)
-  }, [parsedPrice, setSpringProps, isFirstUpdate])
+  }, [parsedPrice, springRef, isFirstUpdate])
 
   return (
     <div className="flex max-w-full flex-row items-start justify-between gap-5 px-5 py-3.5 hover:backdrop-saturate-150 max-md:flex-wrap">
