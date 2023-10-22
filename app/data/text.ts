@@ -1,5 +1,6 @@
 const text = {
-  appTitle: 'Coinmerce - Cryptocurrency Price Tracking',
+  appTitle: 'Coinmerce',
+  appDescription: 'Cryptocurrency price tracking made easy',
   home: {
     title: 'Home',
   },

@@ -1,9 +1,9 @@
-import { json } from '@remix-run/node'
 import {
   isRouteErrorResponse,
   useLoaderData,
   useRouteError,
 } from '@remix-run/react'
+import { json } from '@vercel/remix'
 import take from 'lodash.take'
 import CoinListContainer from '~/components/CoinList/components/CoinListContainer'
 import SearchBar from '~/components/Form/SearchBar'

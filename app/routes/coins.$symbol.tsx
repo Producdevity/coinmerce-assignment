@@ -1,5 +1,5 @@
-import { json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
+import { json } from '@vercel/remix'
 import useCoinImage from '~/components/Icons/CoinIcon/hooks/useCoinImage'
 import Loading from '~/components/ui/Loading'
 import coinsMock from '~/data/mocks/coins.mock'

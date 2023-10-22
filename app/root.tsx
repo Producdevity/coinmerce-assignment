@@ -1,5 +1,4 @@
 import { cssBundleHref } from '@remix-run/css-bundle'
-import { json } from '@remix-run/node'
 import {
   isRouteErrorResponse,
   Links,
@@ -12,7 +11,7 @@ import {
   useRouteError,
 } from '@remix-run/react'
 import { Analytics } from '@vercel/analytics/react'
-import type { LinksFunction } from '@vercel/remix'
+import { json, type MetaFunction, type LinksFunction } from '@vercel/remix'
 import { EnvContext } from '~/context/EnvContext'
 import styles from '~/styles/tailwind.css'
 import t from '~/utils/t'
@@ -40,6 +39,13 @@ export const links: LinksFunction = () => [
   { rel: 'manifest', href: '/site.webmanifest' },
 ]
 
+export const meta: MetaFunction = () => {
+  return [
+    { title: t('appTitle') },
+    { name: 'description', content: t('appDescription') },
+  ]
+}
+
 export async function loader() {
   return json({
     ENV: {
@@ -58,7 +64,6 @@ function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <title>{t('appTitle')}</title>
       </head>
       <body className="bg-base-200 relative h-auto min-h-screen w-full overflow-y-auto">
         <EnvContext.Provider value={data.ENV}>
@@ -83,9 +88,9 @@ export function ErrorBoundary() {
   return (
     <html>
       <head>
-        <title>{t('errors.title')}</title>
         <Meta />
         <Links />
+        <title>{t('errors.title')}</title>
       </head>
       <body>
         <div
