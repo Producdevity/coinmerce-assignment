@@ -5,7 +5,6 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "module": "CommonJS",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "target": "ES2022",
