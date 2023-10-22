@@ -10,7 +10,7 @@ interface Props {
 
 function FavoriteToggle(props: Props) {
   const [isFavorite, setIsFavorite] = useState(props.isFavorite)
-  const [style, setStyle] = useSpring(() => ({
+  const [style, springRef] = useSpring(() => ({
     transform: 'scale(1) rotate(0deg)',
     config: {
       ...config.stiff,
@@ -27,13 +27,13 @@ function FavoriteToggle(props: Props) {
 
     props.onToggle()
 
-    setStyle({
+    springRef.start({
       transform: 'scale(1.4) rotate(15deg)',
       onRest: () => {
-        setStyle({
+        springRef.start({
           transform: 'scale(1.1) rotate(-5deg)',
           onRest: () => {
-            setStyle({
+            springRef.start({
               transform: 'scale(1) rotate(0deg)',
             })
           },

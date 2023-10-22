@@ -61,7 +61,7 @@ function CoinListItem({ symbol, price }: Props) {
           {isTooltipVisible && (
             <animated.div
               style={tooltipTransition}
-              className="absolute -left-16 -top-12 rounded bg-white p-2 shadow"
+              className="absolute -left-16 -top-12 rounded bg-gray-900 p-2 text-sm text-white shadow-2xl"
             >
               {`€ ${price}`}
             </animated.div>
