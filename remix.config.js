@@ -5,6 +5,6 @@ export default {
   // assetsBuildDirectory: "public/build",
   // publicPath: "/build/",
   // serverBuildPath: "build/index.js",
-  postcss: false,
+  postcss: true,
   tailwind: true,
 }

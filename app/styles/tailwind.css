@@ -27,3 +27,15 @@
     --color-yellow: #fecc4c;
   }
 }
+
+.lineGraphEnter {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2s ease-out forwards;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

@@ -64,20 +64,20 @@ export interface SymbolPrice extends SymbolTicker {
   price: string
 }
 
-export interface Kline {
-  0: number // Kline open time
-  1: string // Open price
-  2: string // High price
-  3: string // Low price
-  4: string // Close price
-  5: string // Volume
-  6: number // Kline close time
-  7: string // Quote asset volume
-  8: number // Number of trades
-  9: string // Taker buy base asset volume
-  10: string // Taker buy quote asset volume
-  11: string // Unused field. Ignore.
-}
+export type Kline = [
+  number, // Kline open time
+  string, // Open price
+  string, // High price
+  string, // Low price
+  string, // Close price
+  string, // Volume
+  number, // Kline close time
+  string, // Quote asset volume
+  number, // Number of trades
+  string, // Taker buy base asset volume
+  string, // Taker buy quote asset volume
+  string, // Unused field. Ignore.
+]
 
 export type ChartInterval =
   | '1m'

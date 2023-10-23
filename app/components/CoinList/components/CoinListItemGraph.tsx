@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
+import determineLineColor from '~/components/CoinList/utils/determineLineColor'
 import generatePath from '~/components/CoinList/utils/generatePath'
 import normalizeKlinesData, {
-  GRAPH_HEIGHT,
-  GRAPH_WIDTH,
+  type GraphSize,
 } from '~/components/CoinList/utils/normalizeKlinesData'
 import { type Kline, type SymbolPrice } from '~/types/api.types'
 import api from '~/utils/api'
 
 interface Props {
   symbol: SymbolPrice['symbol']
+  size: GraphSize
 }
 
 function CoinListItemGraph(props: Props) {
@@ -28,17 +29,21 @@ function CoinListItemGraph(props: Props) {
       klines.length
         ? generatePath(
             normalizeKlinesData(klines, {
-              width: GRAPH_WIDTH,
-              height: GRAPH_HEIGHT,
+              width: props.size.width,
+              height: props.size.height,
             }),
           )
         : null,
-    [klines],
+    [klines, props.size.height, props.size.width],
   )
 
   return klines.length && pathData ? (
-    <svg width={GRAPH_WIDTH} height={GRAPH_HEIGHT}>
-      <path d={pathData} fill="none" stroke="blue" strokeWidth="2" />
+    <svg
+      width={props.size.width}
+      height={props.size.width}
+      className={`${determineLineColor(klines)} lineGraphEnter m-auto`}
+    >
+      <path d={pathData} fill="none" strokeWidth="2" />
     </svg>
   ) : null
 }

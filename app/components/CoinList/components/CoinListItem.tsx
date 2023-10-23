@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import CoinListItemDivider from '~/components/CoinList/components/CoinListItemDivider'
 import CoinListItemGraph from '~/components/CoinList/components/CoinListItemGraph'
 import CoinListItemPulse from '~/components/CoinList/components/CoinListItemPulse'
+import { type GraphSize } from '~/components/CoinList/utils/normalizeKlinesData'
 import FavoriteToggle from '~/components/Form/FavoriteToggle'
 import CoinIcon from '~/components/Icons/CoinIcon'
 import { useFavoriteContext } from '~/context/FavoriteContext'
@@ -11,6 +12,7 @@ import type { SymbolPrice } from '~/types/api.types'
 interface Props {
   symbol: SymbolPrice['symbol']
   price: SymbolPrice['price']
+  graphSize: GraphSize
 }
 
 function CoinListItem(props: Props) {
@@ -25,7 +27,7 @@ function CoinListItem(props: Props) {
   })
   const parsedPrice = parseFloat(props.price)
 
-  const [springProps, springRef] = useSpring(() => ({
+  const [priceSpringProps, priceSpringRef] = useSpring(() => ({
     number: parsedPrice,
     from: { number: 0 },
     reset: true,
@@ -39,29 +41,32 @@ function CoinListItem(props: Props) {
   }))
 
   useEffect(() => {
-    springRef.start({ number: parsedPrice })
-  }, [parsedPrice, springRef])
+    priceSpringRef.start({ number: parsedPrice })
+  }, [parsedPrice, priceSpringRef])
 
-  const containerStyles = useSpring({})
   return (
-    <animated.div style={containerStyles}>
+    <>
       <div className="flex max-w-full flex-row items-start justify-between gap-5 px-5 py-3.5 hover:backdrop-saturate-150 max-md:flex-wrap">
-        <div className="flex flex-row items-start gap-2.5 self-center">
+        <div className="flex flex-grow flex-row items-start gap-2.5 self-center">
           <CoinIcon symbol={props.symbol} />
           <span className="self-center text-xs font-bold text-neutral-600">
             {props.symbol}
           </span>
         </div>
+        <div className="absolute left-36 flex md:left-64 lg:left-1/2">
+          <CoinListItemGraph symbol={props.symbol} size={props.graphSize} />
+        </div>
         <div className="flex max-w-full flex-row items-start justify-between gap-5 self-center">
-          <CoinListItemGraph symbol={props.symbol} />
           <div
             onMouseEnter={() => setIsTooltipVisible(true)}
-            onMouseLeave={() => setIsTooltipVisible(false)}
+            onMouseLeave={() =>
+              setTimeout(() => setIsTooltipVisible(false), 200)
+            }
             className="relative"
           >
             <CoinListItemPulse isVisible={isUpdating} />
             <animated.span className="mr-12 self-center text-right text-xs font-semibold text-neutral-600">
-              {springProps.number.to((n) => `€ ${n.toFixed(2)}`)}
+              {priceSpringProps.number.to((n) => `€ ${n.toFixed(2)}`)}
             </animated.span>
             {isTooltipVisible && (
               <animated.div
@@ -79,7 +84,7 @@ function CoinListItem(props: Props) {
         </div>
       </div>
       <CoinListItemDivider />
-    </animated.div>
+    </>
   )
 }
 

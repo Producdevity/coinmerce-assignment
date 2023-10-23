@@ -5,8 +5,13 @@ type Options = {
   height: number
 }
 
-export const GRAPH_WIDTH = 150
-export const GRAPH_HEIGHT = 40
+export type GraphSize = {
+  width: number
+  height: number
+}
+
+export const GRAPH_WIDTH = 140
+export const GRAPH_HEIGHT = 30
 
 function normalizeKlinesData(
   klineData: Kline[],
