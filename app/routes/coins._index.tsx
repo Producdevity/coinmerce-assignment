@@ -3,8 +3,9 @@ import {
   useLoaderData,
   useRouteError,
 } from '@remix-run/react'
-import { json } from '@vercel/remix'
+import { json, type LoaderFunctionArgs } from '@vercel/remix'
 import take from 'lodash.take'
+import { matchSorter } from 'match-sorter'
 import CoinListContainer from '~/components/CoinList/components/CoinListContainer'
 import SearchBar from '~/components/Form/SearchBar'
 import TabBar from '~/components/TabBar/TabBar'
@@ -15,23 +16,29 @@ import supportedCoins, { type SupportedCoin } from '~/data/supportedCoins'
 import api from '~/utils/api'
 import t from '~/utils/t'
 
-export const loader = async () => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const symbolsList: SupportedCoin[] = take(supportedCoins, 10)
-
   const res = await api.getCoins(symbolsList)
+  const url = new URL(request.url)
+  const q = url.searchParams.get('q')
+
+  const filteredCoins = q
+    ? matchSorter(res.data, q, { keys: ['symbol'] })
+    : res.data
 
   return json({
-    coins: res.data,
+    coins: filteredCoins,
+    q,
   })
 }
 
 function Coins() {
-  const { coins } = useLoaderData<typeof loader>()
+  const { coins, q } = useLoaderData<typeof loader>()
 
   return (
     <FavoriteContextProvider>
       <TabContextProvider>
-        <SearchBar />
+        <SearchBar q={q} />
         <TabBar />
         {coins ? <CoinListContainer coins={coins} /> : <Loading />}
       </TabContextProvider>
