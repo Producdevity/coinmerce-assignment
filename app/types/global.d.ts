@@ -5,6 +5,7 @@ export {}
 declare global {
   interface Window {
     ENV: {
+      BINANCE_API_BASE_URL: string
       BINANCE_WEBSOCKET_URL: string
     }
   }

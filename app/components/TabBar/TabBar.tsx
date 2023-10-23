@@ -28,8 +28,7 @@ function TabBar(props: Props) {
       <ul className="-mb-px flex flex-wrap">
         {tabs.map((tab) => (
           <li className="mr-2" key={tab.id}>
-            <a
-              href="#"
+            <button
               onClick={(ev) => handleTabClick(tab, ev)}
               className={`inline-block rounded-t-lg p-4 text-gray-400 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300 ${
                 currentTab.id === tab.id
@@ -39,7 +38,7 @@ function TabBar(props: Props) {
               aria-current={currentTab.id === tab.id ? 'page' : 'false'}
             >
               {tab.label}
-            </a>
+            </button>
           </li>
         ))}
       </ul>

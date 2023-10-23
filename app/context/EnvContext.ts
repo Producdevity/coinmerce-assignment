@@ -1,10 +1,10 @@
 import { createContext, useContext } from 'react'
+import { type Env } from '~/types/env'
 
-interface EnvContextType {
-  BINANCE_WEBSOCKET_URL: string
-}
+type EnvContextType = Env
 
 export const EnvContext = createContext<EnvContextType>({
+  BINANCE_API_BASE_URL: '',
   BINANCE_WEBSOCKET_URL: '',
 })
 

@@ -1,6 +1,6 @@
 // All the types that are used in the Binance V3 API that we are using
 
-type CoinSymbol =
+export type CoinSymbol =
   | 'ADAEUR'
   | 'ALPINEEUR'
   | 'APEEUR'
@@ -62,6 +62,49 @@ export interface SymbolTicker {
 // Symbol Price Ticker (GET /api/v3/ticker/price)
 export interface SymbolPrice extends SymbolTicker {
   price: string
+}
+
+export interface Kline {
+  0: number // Kline open time
+  1: string // Open price
+  2: string // High price
+  3: string // Low price
+  4: string // Close price
+  5: string // Volume
+  6: number // Kline close time
+  7: string // Quote asset volume
+  8: number // Number of trades
+  9: string // Taker buy base asset volume
+  10: string // Taker buy quote asset volume
+  11: string // Unused field. Ignore.
+}
+
+export type ChartInterval =
+  | '1m'
+  | '3m'
+  | '5m'
+  | '15m'
+  | '30m'
+  | '1h'
+  | '2h'
+  | '4h'
+  | '6h'
+  | '8h'
+  | '12h'
+  | '1d'
+  | '3d'
+  | '1w'
+  | '1M'
+
+export type KlinesParams = {
+  symbol: SymbolPrice['symbol']
+  interval?: ChartInterval
+  limit?: number
+}
+
+export interface NormalizedKlinePoint {
+  x: number
+  y: number
 }
 
 export interface WebSocketTickerResponse {

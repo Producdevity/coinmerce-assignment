@@ -14,6 +14,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { json, type MetaFunction, type LinksFunction } from '@vercel/remix'
 import { EnvContext } from '~/context/EnvContext'
 import styles from '~/styles/tailwind.css'
+import { type Env } from '~/types/env'
 import t from '~/utils/t'
 
 export const links: LinksFunction = () => [
@@ -47,11 +48,11 @@ export const meta: MetaFunction = () => {
 }
 
 export async function loader() {
-  return json({
-    ENV: {
-      BINANCE_WEBSOCKET_URL: process.env.BINANCE_WEBSOCKET_URL || '',
-    },
-  })
+  const ENV: Env = {
+    BINANCE_API_BASE_URL: process.env.BINANCE_API_BASE_URL ?? '',
+    BINANCE_WEBSOCKET_URL: process.env.BINANCE_WEBSOCKET_URL ?? '',
+  }
+  return json({ ENV })
 }
 
 function App() {
