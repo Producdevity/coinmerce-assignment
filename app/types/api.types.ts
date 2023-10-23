@@ -1,6 +1,6 @@
 // All the types that are used in the Binance V3 API that we are using
 
-type Symbol =
+type CoinSymbol =
   | 'ADAEUR'
   | 'ALPINEEUR'
   | 'APEEUR'
@@ -56,7 +56,7 @@ type Symbol =
   | 'ZILEUR'
 
 export interface SymbolTicker {
-  symbol: Symbol
+  symbol: CoinSymbol
 }
 
 // Symbol Price Ticker (GET /api/v3/ticker/price)

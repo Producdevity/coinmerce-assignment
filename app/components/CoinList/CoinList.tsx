@@ -1,7 +1,5 @@
-import { useAutoAnimate } from '@formkit/auto-animate/react'
-// import { animated, config, useTransition } from '@react-spring/web'
-import { Fragment } from 'react'
-// import { Fragment, useEffect, useState } from 'react'
+import { animated, config, useTransition } from '@react-spring/web'
+import { useEffect, useState } from 'react'
 import CoinListHeader from '~/components/CoinList/components/CoinListHeader'
 import CoinListItem from '~/components/CoinList/components/CoinListItem'
 import CoinListItemDivider from '~/components/CoinList/components/CoinListItemDivider'
@@ -11,49 +9,41 @@ interface Props {
   coins: SymbolPrice[]
 }
 
+const ITEM_HEIGHT = 60
+
 function CoinList(props: Props) {
-  // const [coins, setCoins] = useState<SymbolPrice[]>([])
-  //
-  // useEffect(() => {
-  //   setCoins(props.coins)
-  // }, [props.coins])
+  const [coins, setCoins] = useState<SymbolPrice[]>([])
 
-  // const transitions = useTransition(coins, {
-  //   keys: (coin: SymbolPrice) => coin.symbol,
-  //   from: { opacity: 0, transform: 'translateX(-100%)' },
-  //   enter: { opacity: 1, transform: 'translateX(0px)' },
-  //   leave: { opacity: 0, transform: 'translateX(-50%)' },
-  //   config: config.stiff,
-  //   trail: 25,
-  // })
+  useEffect(() => {
+    setCoins(props.coins)
+  }, [props.coins])
 
-  const [listRef] = useAutoAnimate<HTMLDivElement>()
-  //   from: { opacity: 0, transform: 'translateX(-100%)' },
-  //   enter: { opacity: 1, transform: 'translateX(0px)' },
-  //   leave: { opacity: 0, transform: 'translateX(-50%)' },
-  //   config: config.stiff,
-  //   trail: 25,
-  // })
+  const transitions = useTransition(coins, {
+    keys: (coin: SymbolPrice) => coin.symbol,
+    from: { opacity: 0, transform: 'translateX(-100%)' },
+    enter: {
+      opacity: 1,
+      transform: 'translateX(0px)',
+      maxHeight: ITEM_HEIGHT,
+    },
+    leave: {
+      opacity: 0,
+      transform: 'translateX(-50%)',
+      maxHeight: 0,
+    },
+    config: config.stiff,
+    trail: 25,
+  })
 
   return (
     <section className="mt-6 flex flex-col self-stretch rounded-lg border border-solid border-slate-100 bg-white py-6 max-md:max-w-full">
       <CoinListHeader />
       <CoinListItemDivider />
-      <div ref={listRef}>
-        {props.coins.map((coin) => (
-          <Fragment key={coin.symbol}>
-            <CoinListItem {...coin} />
-            <CoinListItemDivider />
-          </Fragment>
-        ))}
-      </div>
-
-      {/*{transitions((styles, coin) => (*/}
-      {/*  <animated.div style={styles}>*/}
-      {/*    <CoinListItem {...coin} />*/}
-      {/*    <CoinListItemDivider />*/}
-      {/*  </animated.div>*/}
-      {/*))}*/}
+      {transitions((style, coin) => (
+        <animated.div style={style}>
+          <CoinListItem {...coin} />
+        </animated.div>
+      ))}
     </section>
   )
 }

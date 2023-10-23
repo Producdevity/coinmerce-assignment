@@ -1,4 +1,4 @@
-import axios, { type AxiosPromise } from 'axios'
+import axios from 'axios'
 import type { SupportedCoin } from '~/data/supportedCoins'
 import type { SymbolPrice } from '~/types/api.types'
 import encodeSymbols from '~/utils/encodeSymbols'
@@ -15,7 +15,7 @@ class Api {
 
   constructor() {
     this.http.interceptors.request.use(
-      this.onRequestFulfilled,
+      (config) => config,
       this.onRequestRejected,
     )
     this.http.interceptors.response.use(
@@ -23,8 +23,6 @@ class Api {
       this.onResponseRejected,
     )
   }
-
-  onRequestFulfilled = (config: any) => config
 
   onRequestRejected = (error: any) => {
     console.error('onRequestRejected', error)
@@ -46,15 +44,12 @@ class Api {
     console.warn(`error status: ${error.response.status}`, error.response.data)
   }
 
-  public getCoins(symbolsList: SupportedCoin[]): GetCoinsPromise {
-    return this.http.get(
+  public getCoins(symbolsList: SupportedCoin[]) {
+    return this.http.get<SymbolPrice[]>(
       `api/v3/ticker/price?symbols=${encodeSymbols(symbolsList, 'EUR')}`,
     )
   }
 }
-
-// Axios Promise Types
-type GetCoinsPromise = AxiosPromise<SymbolPrice[]>
 
 const api = new Api()
 

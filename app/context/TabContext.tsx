@@ -12,13 +12,17 @@ interface TabContextType {
 }
 
 export const TabContext = createContext<TabContextType>({
-  setTabId: () => {},
+  setTabId: (tabId) => {
+    throw new Error(
+      `setTabId function is not yet initialized, called with: ${tabId}`,
+    )
+  },
   currentTab: tabs[0],
 })
 
 export const useTabContext = () => useContext(TabContext)
 
-export function TabContextProvider(props: PropsWithChildren<{}>) {
+export function TabContextProvider(props: PropsWithChildren) {
   const [tabId, setTabId] = useState<Tab['id']>(tabs[0].id)
 
   const contextValue: TabContextType = {

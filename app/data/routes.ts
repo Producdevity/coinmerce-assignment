@@ -17,7 +17,11 @@ type StaticRoute = {
 }[keyof typeof routes]
 
 type DynamicRoute = {
-  [K in keyof typeof routes]: (typeof routes)[K] extends Function ? K : never
+  [K in keyof typeof routes]: (typeof routes)[K] extends (
+    params: RouteParams,
+  ) => string
+    ? K
+    : never
 }[keyof typeof routes]
 
 type Route = StaticRoute | DynamicRoute

@@ -17,13 +17,21 @@ const LOCAL_STORAGE_KEY = 'cryptoTracker.favorites'
 
 export const FavoriteContext = createContext<FavoriteContextType>({
   favorites: [],
-  isFavorite: () => false,
-  toggleFavorite: () => {},
+  isFavorite: (coin) => {
+    throw new Error(
+      `isFavorite was called with ${coin} before being initialized.`,
+    )
+  },
+  toggleFavorite: (coin) => {
+    throw new Error(
+      `toggleFavorite was called with ${coin} before being initialized.`,
+    )
+  },
 })
 
 export const useFavoriteContext = () => useContext(FavoriteContext)
 
-export function FavoriteContextProvider(props: PropsWithChildren<{}>) {
+export function FavoriteContextProvider(props: PropsWithChildren) {
   const [favorites, setFavorites] = useState<SupportedCoin[]>([])
   const [loading, setLoading] = useState(true)
 

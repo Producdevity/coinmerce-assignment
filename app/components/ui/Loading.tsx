@@ -5,7 +5,7 @@ interface Props {
 }
 
 function Loading(props: Props) {
-  const size = props.size || 30
+  const size = props.size ?? 30
 
   return (
     <div role="status" className="flex items-center justify-center">

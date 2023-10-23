@@ -22,23 +22,23 @@ function clearBrowserExtensionInjectionsBeforeHydration() {
 
   const $targets = {
     html: {
-      $elm: document.querySelector('html')!,
+      $elm: document.querySelector('html'),
       allowedAttributes: ['lang', 'dir', 'class'],
     },
     head: {
-      $elm: document.querySelector('head')!,
+      $elm: document.querySelector('head'),
       allowedAttributes: [''],
     },
     body: {
-      $elm: document.querySelector('body')!,
+      $elm: document.querySelector('body'),
       allowedAttributes: ['class'],
     },
   }
 
   Object.entries($targets).forEach(([_, target]) => {
-    target.$elm.getAttributeNames().forEach((attr) => {
+    target.$elm?.getAttributeNames().forEach((attr) => {
       if (!target.allowedAttributes.includes(attr)) {
-        target.$elm.removeAttribute(attr)
+        target.$elm?.removeAttribute(attr)
       }
     })
   })
