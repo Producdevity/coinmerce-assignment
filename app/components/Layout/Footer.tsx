@@ -1,13 +1,16 @@
 function Footer() {
   return (
-    <div className="min-h-52 sticky bottom-0 flex flex-col self-stretch bg-slate-950 px-5 py-10 max-md:max-w-full">
+    <div className="bottom-0 flex flex-col self-stretch bg-slate-950 px-5 py-10 max-md:max-w-full">
       <div className="mx-14 mt-1 flex max-w-full flex-row items-start justify-between gap-5 max-md:ml-2.5 max-md:max-w-full max-md:flex-wrap max-md:justify-center">
-        <div className="text-xs font-medium slashed-zero text-white">
+        <a
+          href="https://coinmerce.io"
+          className="text-xs font-medium slashed-zero text-white"
+        >
           Coinmerce 2023 © Copyright
-        </div>
+        </a>
         <a
           href="https://coinmerce.io/nl/privacy-policy/"
-          className="self-stretch text-xs font-medium slashed-zero text-white"
+          className="text-xs font-medium slashed-zero text-white"
         >
           Privacy Policy
         </a>
