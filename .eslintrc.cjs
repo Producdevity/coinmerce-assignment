@@ -18,4 +18,13 @@ module.exports = {
     'prefer-template': 'error',
     'react/jsx-key': 'error',
   },
+  overrides: [
+    {
+      files: ['**/*.test.ts', '**/*.test.tsx'],
+      env: {
+        jest: true,
+        node: true,
+      },
+    },
+  ],
 }
