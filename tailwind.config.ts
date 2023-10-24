@@ -13,6 +13,10 @@ export default {
         body: ['var(--hx-font-raleway)', ...defaultTheme.fontFamily.sans],
       },
     },
+    spacing: {
+      ...defaultTheme.spacing,
+      6.5: '1.625rem',
+    },
   },
   plugins: [],
 } satisfies Config
