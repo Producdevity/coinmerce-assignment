@@ -14,6 +14,9 @@ dependencies:
   '@lottiefiles/lottie-player':
     specifier: ^2.0.2
     version: 2.0.2
+  '@react-spring/rafz':
+    specifier: ^9.7.3
+    version: 9.7.3
   '@react-spring/web':
     specifier: ^9.7.3
     version: 9.7.3(react-dom@18.2.0)(react@18.2.0)
@@ -1608,6 +1611,10 @@ packages:
       '@react-spring/shared': 9.7.3(react@18.2.0)
       '@react-spring/types': 9.7.3
       react: 18.2.0
+    dev: false
+
+  /@react-spring/rafz@9.7.3:
+    resolution: {integrity: sha512-9vzW1zJPcC4nS3aCV+GgcsK/WLaB520Iyvm55ARHfM5AuyBqycjvh1wbmWmgCyJuX4VPoWigzemq1CaaeRSHhQ==}
     dev: false
 
   /@react-spring/shared@9.7.3(react@18.2.0):
