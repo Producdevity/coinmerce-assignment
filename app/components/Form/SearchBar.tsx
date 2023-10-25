@@ -1,6 +1,6 @@
 import { Form, useSubmit } from '@remix-run/react'
 import { useEffect } from 'react'
-import AnimatedIcon from '~/components/Icons/CoinIcon/AnimatedIcon'
+import AnimatedIcon from '~/components/Icons/AnimatedIcon'
 import searchIconAnimation from '~/components/Icons/SearchIcon/SearchIcon.animation.json'
 import Loading from '~/components/ui/Loading'
 import t from '~/utils/t'

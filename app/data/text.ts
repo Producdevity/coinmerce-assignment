@@ -3,6 +3,8 @@ const text = {
   appDescription: 'Cryptocurrency price tracking made easy',
   home: {
     title: 'Home',
+    goToCoinsPage: 'Go to Coins page',
+    explanation: `because that's the only page that I worked on 🤫`,
   },
   coins: {
     title: 'Coins',
