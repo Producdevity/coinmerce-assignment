@@ -19,7 +19,7 @@ You can check out the live version of the app [here](https://coinmerce-assignmen
 ### Install Dependencies
 
 ```sh
-pnpm install
+npm install
 ```
 
 ### Configure Environment Variables
@@ -28,13 +28,13 @@ Copy the `.env.example` file to `.env` and fill in the values.
 
 ### Download Coin Images
 
-To make sure the images are up to date run `pnpm run download-images` from the root of the project.
+To make sure the images are up to date run `npm run download-images` from the root of the project.
 This will download the latest coin images from the [Coinmerce](https://coinmerce.io) and save them to the `public/images` folder.
 
 ### Start the Development Server
 
 ```sh
-pnpm run dev
+npm run dev
 ```
 
 This starts your app in development mode, rebuilding assets on file changes.
@@ -44,13 +44,13 @@ This starts your app in development mode, rebuilding assets on file changes.
 First, build your app for production:
 
 ```sh
-pnpm run build
+npm run build
 ```
 
 Then run the app in production mode:
 
 ```sh
-pnpm start
+npm start
 ```
 
 Now you'll need to pick a host to deploy it to.
@@ -71,7 +71,6 @@ Make sure to deploy the output of `remix build`
 - [React](https://reactjs.org) - JavaScript library
 - [React Spring](https://react-spring.io) - Animation library
 - [Lottie](https://airbnb.design/lottie) - Animation library
-- [PNPM](https://pnpm.io) - Package manager
 - [Vercel](https://vercel.com) - Hosting platform
 - [TypeScript](https://www.typescriptlang.org) - Programming language
 - [ESBuild](https://esbuild.github.io) - JavaScript bundler

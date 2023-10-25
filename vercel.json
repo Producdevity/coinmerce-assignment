@@ -1,6 +1,6 @@
 {
   "framework": "remix",
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm run build",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
   "regions": ["fra"]
 }
