@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  base:
+    build:
+      context: .
+      args:
+        BASE_IMAGE: node:18.18-bullseye
+        NODE_ENV: development
+    environment:
+      NODE_ENV: development
+
+  dev:
+    extends:
+      service: base
+    container_name: coinmerce-assignment-dev
+    build:
+      context: ./docker
+      dockerfile: docker/dev.Dockerfile
+      args:
+        BASE_IMAGE: node:18.18-bullseye
+        NODE_ENV: development
+    environment:
+      NODE_ENV: development
+      BINANCE_API_BASE_URL: ${BINANCE_API_BASE_URL}
+      BINANCE_WEBSOCKET_URL: ${BINANCE_WEBSOCKET_URL}
+    command: npm run dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+
+  prod:
+    extends:
+      service: base
+    container_name: coinmerce-assignment-prod
+    build:
+      context: ./docker
+      dockerfile: docker/prod.Dockerfile
+      args:
+        BASE_IMAGE: node:18.18-bullseye-slim
+        NODE_ENV: production
+    environment:
+      NODE_ENV: production
+      BINANCE_API_BASE_URL: ${BINANCE_API_BASE_URL}
+      BINANCE_WEBSOCKET_URL: ${BINANCE_WEBSOCKET_URL}
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+    command: npm run start
+

@@ -10,7 +10,7 @@ I chose [Remix](https://remix.run) over [NextJS](https://nextjs.org) because it 
 
 > ##### Note
 >
-> This currently doesn't work because the Binance API doesn't work in the US, where Vercel have their free tier servers.
+> The app is completely supported at the moment since the Binance API doesn't work in the US, where Vercel have their free tier servers.
 
 You can check out the live version of the app [here](https://coinmerce-assignment.vercel.app).
 
@@ -19,7 +19,7 @@ You can check out the live version of the app [here](https://coinmerce-assignmen
 ### Install Dependencies
 
 ```sh
-npm install
+$ npm install
 ```
 
 ### Configure Environment Variables
@@ -34,23 +34,43 @@ This will download the latest coin images from the [Coinmerce](https://coinmerce
 ### Start the Development Server
 
 ```sh
-npm run dev
+$ npm run dev
 ```
 
 This starts your app in development mode, rebuilding assets on file changes.
+
+### Using Docker
+
+If you have Docker installed, you can run the app in a container:
+
+```sh
+$ docker-compose build dev
+$ docker-compose up dev
+```
+
+This will start the app in development mode, rebuilding assets on file changes.
+
+For the production version, run:
+
+```sh
+$ docker-compose build prod
+$ docker-compose up prod
+```
+
+This will build the app for production and start it.
 
 ## Deployment
 
 First, build your app for production:
 
 ```sh
-npm run build
+$ npm run build
 ```
 
 Then run the app in production mode:
 
 ```sh
-npm start
+$ npm start
 ```
 
 Now you'll need to pick a host to deploy it to.
@@ -81,3 +101,4 @@ Make sure to deploy the output of `remix build`
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) - React testing utilities
 - [Husky](https://typicode.github.io/husky) - Git hooks
 - [Lint Staged](https://github.com/lint-staged/lint-staged) - Run linters against staged git files
+- [Docker](https://www.docker.com) - Containerization platform
