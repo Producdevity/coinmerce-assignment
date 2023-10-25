@@ -10,7 +10,7 @@ I chose [Remix](https://remix.run) over [NextJS](https://nextjs.org) because it 
 
 > ##### Note
 >
-> The app is completely supported at the moment since the Binance API doesn't work in the US, where Vercel have their free tier servers.
+> The live version of the app is not completely supported at the moment since the Binance API doesn't work in the US, where Vercel have their free tier servers.
 
 You can check out the live version of the app [here](https://coinmerce-assignment.vercel.app).
 
