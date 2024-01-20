@@ -1,3 +1,4 @@
+// https://api.binance.com/api/v3/uiKlines?symbol={symbol}&interval={ChartInterval}&limit={limit}
 import { type Kline } from '~/types/api.types'
 
 const klinesMock: Kline[] = [

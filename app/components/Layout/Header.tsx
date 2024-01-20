@@ -1,4 +1,4 @@
-import { Link, NavLink } from '@remix-run/react'
+import { Link, NavLink, useNavigate } from '@remix-run/react'
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import CoinmerceLogo from '~/assets/images/coinmerce-logo.svg'
 import MenuIcon from '~/components/Icons/MenuIcon'
@@ -9,13 +9,16 @@ import t from '~/utils/t'
 type UnderlineStyle = {
   width: string
   transform: string
+  transition: string
 }
 
 function Header() {
+  const navigate = useNavigate()
   const [isNavOpen, setIsNavOpen] = useState(false)
   const [underlineStyle, setUnderlineStyle] = useState<UnderlineStyle>({
     width: '0',
     transform: 'translateX(0px)',
+    transition: 'none',
   })
   const navRef = useRef<HTMLDivElement>(null)
   const navLinkRefs = useRef<(HTMLAnchorElement | null)[]>([])
@@ -24,14 +27,25 @@ function Header() {
     (_, index) => navLinkRefs.current[index] ?? null,
   )
 
+  const onClickNavLink = (ev: MouseEvent<HTMLAnchorElement>) => {
+    const href = ev.currentTarget.href
+    ev.preventDefault()
+    updateUnderline(ev)
+    setTimeout(() => {
+      navigate(href)
+    }, 200)
+  }
+
   const updateUnderline = (ev: MouseEvent<HTMLAnchorElement>) => {
+    const initiatedByClick = ev.type === 'click'
     const navLeft = navRef.current
       ? navRef.current.getBoundingClientRect().left
       : 0
     const rect = ev.currentTarget.getBoundingClientRect()
     setUnderlineStyle({
-      width: `${rect.width}px`,
-      transform: `translateX(${rect.x - navLeft - 15}px)`,
+      width: `${rect.width + 4}px`,
+      transform: `translateX(${rect.x - navLeft - 18}px)`,
+      transition: initiatedByClick ? 'all 0.2s ease' : 'none',
     })
   }
 
@@ -84,7 +98,7 @@ function Header() {
                 <NavLink
                   to={navLink.to}
                   ref={(ref) => (navLinkRefs.current[index] = ref)}
-                  onClick={updateUnderline}
+                  onClick={onClickNavLink}
                   className={({ isActive }) =>
                     `block rounded py-2 pl-3 pr-4  font-sans slashed-zero md:bg-transparent md:p-0 ${
                       isActive ? 'text-blue-500' : 'text-white'
@@ -97,8 +111,8 @@ function Header() {
             ))}
           </ul>
           <div
-            className="absolute bottom-0 h-0.5 bg-blue-500"
-            style={{ ...underlineStyle, transition: 'all 0.3s ease' }}
+            className="absolute -bottom-6.5 h-0.5 bg-blue-500"
+            style={{ ...underlineStyle }}
           />
         </div>
         <div className="w-[150px] flex-grow max-md:hidden"></div>

@@ -1,4 +1,5 @@
 import { animated, config, useSpring } from '@react-spring/web'
+import { Link } from '@remix-run/react'
 import { useEffect, useState } from 'react'
 import CoinListItemDivider from '~/components/CoinList/components/CoinListItemDivider'
 import CoinListItemGraph from '~/components/CoinList/components/CoinListItemGraph'
@@ -7,6 +8,7 @@ import { type GraphSize } from '~/components/CoinList/utils/normalizeKlinesData'
 import FavoriteToggle from '~/components/Form/FavoriteToggle'
 import CoinIcon from '~/components/Icons/CoinIcon'
 import { useFavoriteContext } from '~/context/FavoriteContext'
+import routes from '~/data/routes'
 import type { SymbolPrice } from '~/types/api.types'
 
 interface Props {
@@ -45,7 +47,7 @@ function CoinListItem(props: Props) {
   }, [parsedPrice, priceSpringRef])
 
   return (
-    <>
+    <Link to={routes.coin({ id: props.symbol })}>
       <div className="flex max-w-full flex-row items-start justify-between gap-5 px-5 py-3.5 hover:backdrop-saturate-150 max-md:flex-wrap">
         <div className="flex flex-grow flex-row items-start gap-2.5 self-center">
           <CoinIcon symbol={props.symbol} />
@@ -84,7 +86,7 @@ function CoinListItem(props: Props) {
         </div>
       </div>
       <CoinListItemDivider />
-    </>
+    </Link>
   )
 }
 

@@ -64,6 +64,30 @@ export interface SymbolPrice extends SymbolTicker {
   price: string
 }
 
+// 24hr Ticker Price Change Statistics (GET /api/v3/ticker/24hr)
+export interface SymbolPriceDetails extends SymbolTicker {
+  priceChange: string
+  priceChangePercent: string
+  weightedAvgPrice: string
+  prevClosePrice: string
+  lastPrice: string
+  lastQty: string
+  bidPrice: string
+  bidQty: string
+  askPrice: string
+  askQty: string
+  openPrice: string
+  highPrice: string
+  lowPrice: string
+  volume: string
+  quoteVolume: string
+  openTime: number
+  closeTime: number
+  firstId: number
+  lastId: number
+  count: number
+}
+
 export type Kline = [
   number, // Kline open time
   string, // Open price

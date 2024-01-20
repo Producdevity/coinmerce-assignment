@@ -14,6 +14,7 @@ module.exports = {
     ],
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    'no-unused-vars': 'off',
     'prefer-const': 'error',
     'prefer-template': 'error',
     'react/jsx-key': 'error',

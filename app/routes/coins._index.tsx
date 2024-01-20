@@ -7,6 +7,7 @@ import { json, type LoaderFunctionArgs } from '@vercel/remix'
 import take from 'lodash.take'
 import { matchSorter } from 'match-sorter'
 import CoinListContainer from '~/components/CoinList/components/CoinListContainer'
+import FilterBar from '~/components/Form/FilterBar'
 import SearchBar from '~/components/Form/SearchBar'
 import TabBar from '~/components/TabBar/TabBar'
 import Loading from '~/components/ui/Loading'
@@ -40,6 +41,7 @@ function Coins() {
       <TabContextProvider>
         <SearchBar q={q} />
         <TabBar />
+        <FilterBar />
         {coins ? <CoinListContainer coins={coins} /> : <Loading />}
       </TabContextProvider>
     </FavoriteContextProvider>

@@ -1,7 +1,13 @@
 import axios from 'axios'
 import { BINANCE_API_BASE_URL } from '~/data/env'
 import type { SupportedCoin } from '~/data/supportedCoins'
-import type { Kline, KlinesParams, SymbolPrice } from '~/types/api.types'
+import {
+  type CoinSymbol,
+  type SymbolPriceDetails,
+  type Kline,
+  type KlinesParams,
+  type SymbolPrice,
+} from '~/types/api.types'
 import encodeSymbols from '~/utils/encodeSymbols'
 
 class Api {
@@ -48,6 +54,12 @@ class Api {
   public getCoins(symbolsList: SupportedCoin[]) {
     return this.http.get<SymbolPrice[]>(
       `api/v3/ticker/price?symbols=${encodeSymbols(symbolsList, 'EUR')}`,
+    )
+  }
+
+  public getCoin(symbol: CoinSymbol) {
+    return this.http.get<SymbolPriceDetails>(
+      `api/v3/ticker/24hr?symbol=${symbol}`,
     )
   }
 

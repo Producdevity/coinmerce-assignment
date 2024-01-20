@@ -31,7 +31,7 @@
     "@remix-run/serve": "^2.1.0",
     "@vercel/analytics": "^1.1.1",
     "@vercel/remix": "^2.1.0",
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "isbot": "^3.7.0",
     "lodash.foreach": "^4.5.0",
     "lodash.get": "^4.4.2",
@@ -40,7 +40,7 @@
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.4"
+    "tailwindcss": "^3.3.5"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.1.0",
